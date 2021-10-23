@@ -29,6 +29,7 @@ function App() {
     let timeRange = keyWordMap.get(pageCount);
     setStart(timeRange[0]);
     setEnd(timeRange[1]);
+    console.log("used");
   }, [pageCount]);
 
   return (
@@ -43,7 +44,7 @@ function App() {
       <Slide url={"images/image_" + pageCount + ".png"} keywords={"jj"}  />
 
       <div className="audio-footer">
-        <Audio url="https://freesound.org/data/previews/593/593675_9034501-lq.mp3" start={start} end={end}/>
+        <Audio url="audiofile.mp3" start={start} end={end}/>
       </div>
       
     </div>
