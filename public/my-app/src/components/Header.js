@@ -5,8 +5,8 @@ const Header = () => {
         <div>
             <div className="header">
                 <button>Home</button>
-                <button>{"<"}</button>
-                <button>{">"}</button>
+                <button className="back-btn">{"<"}</button>
+                <button className="next-btn">{">"}</button>
             </div>
         </div>
     );
