@@ -1,6 +1,7 @@
 import os
 import json
 
+VIDEO_FILE = "../../data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU2.mp4"
 from constants import DATA_DIR
 from process import process_video
 from gen_graph import generate_graph
