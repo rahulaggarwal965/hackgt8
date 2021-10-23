@@ -1,10 +1,11 @@
 {
   "index": 9,
-  "audio_timestamp": [
+  "image": "/home/infinity/Documents/Georgia_Tech/sem3/hackgt8/data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images/image_9.png",
+  "timestamp": [
     513.8,
     575.3333333333334
   ],
-  "audio_transcript": null,
+  "audio_transcript": "",
   "paragraphs": [
     "Aerobic Reactions",
     "In presence of O,, pyruvic acid enters aerobic pathways",

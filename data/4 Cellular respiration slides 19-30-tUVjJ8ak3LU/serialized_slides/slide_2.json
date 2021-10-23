@@ -1,10 +1,11 @@
 {
   "index": 2,
-  "audio_timestamp": [
+  "image": "/home/infinity/Documents/Georgia_Tech/sem3/hackgt8/data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images/image_2.png",
+  "timestamp": [
     48.8,
     149.63333333333333
   ],
-  "audio_transcript": null,
+  "audio_transcript": "",
   "paragraphs": [
     "4.4 Cellular Respiration .",
     "Cellular Respiration of glucose occurs in 3 interconnected",

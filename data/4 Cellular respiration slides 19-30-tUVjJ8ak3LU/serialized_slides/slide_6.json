@@ -1,10 +1,11 @@
 {
   "index": 6,
-  "audio_timestamp": [
+  "image": "/home/infinity/Documents/Georgia_Tech/sem3/hackgt8/data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images/image_6.png",
+  "timestamp": [
     347.6666666666667,
     400.3666666666667
   ],
-  "audio_transcript": null,
+  "audio_transcript": "",
   "paragraphs": [
     "Glycolysis",
     "Glycolysis:",
@@ -21,18 +22,18 @@
     "3",
     "Production of NADH, ATP, and 2 molecules of pyruvic acid",
     " ",
-    "Hill LLC. 7",
+    "McGraw Hill LLC. 7",
     ""
   ],
   "keywords": [
     "2 atp molecules per glucose molecule broken",
+    "mcgraw hill llc",
     "2 pyruvic acid",
     "2 molecules",
     "glucose breakdown",
     "pyruvic acid",
     "carbon molecules",
     "reaction sequence",
-    "hill llc",
     "cellular respiration",
     "atp",
     "10 reactions",

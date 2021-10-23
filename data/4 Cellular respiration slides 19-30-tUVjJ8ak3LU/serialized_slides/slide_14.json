@@ -1,10 +1,11 @@
 {
   "index": 14,
-  "audio_timestamp": [
+  "image": "/home/infinity/Documents/Georgia_Tech/sem3/hackgt8/data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images/image_14.png",
+  "timestamp": [
     772.4333333333333,
     866.2666666666667
   ],
-  "audio_transcript": null,
+  "audio_transcript": "",
   "paragraphs": [
     "4.4 Cellular Respiration .",
     "Cellular Respiration of glucose occurs in 3 interconnected",
@@ -18,14 +19,13 @@
     "Citric Acid Cycle occurs in a metabolic cycle in which the",
     "final product reacts to replenish original substrate",
     " ",
-    "raw Hill LLC. Al rights reserved. No",
+    "Hill LLC. Al rights reserved.",
     ""
   ],
   "keywords": [
     "citric acid cycle occurs",
     "citric acid cycle",
     "replenish original substrate",
-    "raw hill llc",
     "final product reacts",
     "electron transport chain",
     "al rights reserved",
@@ -35,6 +35,7 @@
     "cellular respiration",
     "reaction sequences",
     "oxidative phosphorylation",
+    "hill llc",
     "3 interconnected",
     "4",
     "stepwise",

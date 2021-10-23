@@ -1,19 +1,20 @@
 {
   "index": 5,
-  "audio_timestamp": [
+  "image": "/home/infinity/Documents/Georgia_Tech/sem3/hackgt8/data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images/image_5.png",
+  "timestamp": [
     299.3333333333333,
     347.6666666666667
   ],
-  "audio_transcript": null,
+  "audio_transcript": "",
   "paragraphs": [
     "Figure 4.11 Glucose Catabolism",
     "e",
     ".m..um.",
-    "e 3",
+    "3",
     "wih",
     "   ",
     " ",
-    "Access the text alterative for slide",
+    "Access the text alterative for",
     "2022 \u00a9 McGraw Hill LLC. Al ights reserved. No reproduction or distribution without the prior written consent of McGraw Hill LLC."
   ],
   "keywords": [
@@ -26,11 +27,10 @@
     "figure 4",
     "distribution without",
     ".. um",
-    "e 3",
-    "e",
     "wih",
-    "slide",
     "reproduction",
-    "access"
+    "e",
+    "access",
+    "3"
   ]
 }
