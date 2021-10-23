@@ -1,6 +1,6 @@
 .current-slide {
     position: fixed; 
-    top: 60px;
+    top: 8%;
     left: 0;
 }
 .slide-and-keywords {
@@ -11,10 +11,11 @@
 }
 
 .vl {
-    border-left: 60px solid red;
-    height: 720px;
+    border-left: 100px solid red;
+    border-width: 20%;
+    height: 84.5%;
     position: absolute;
-    left: 1280px;
-    margin-left: -3px;
-    top: 60px;
-  }
+    left: 73.5%;
+    top: 8%;
+    bottom: 0px;
+}
