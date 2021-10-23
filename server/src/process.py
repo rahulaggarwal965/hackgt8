@@ -12,24 +12,25 @@ import moviepy.editor as mp
 import speech_recognition as sr
 
 # Local
-from slide import Slide
+from slide import Slide, serialize_slides
 from constants import FRAME_DISTANCE_THRESHOLD, DATA_DIR
 
-def init_audio_transcripter(video_file, transcribe_audio):
-    r, audio_file = None, None
-    if transcribe_audio:
-        video_data_dir = path.splitext(video_file)[0]
-        if not path.exists(video_data_dir):
-            os.mkdir(video_data_dir)
-        audio_file_name = f"{video_data_dir}/{os.path.basename(video_data_dir)}.wav"
-        if not path.exists(audio_file_name):
-            clip = mp.VideoFileClip(video_file)
-            clip.audio.write_audiofile(audio_file_name)
-        
-        r = sr.Recognizer()
-        audio = sr.AudioFile(audio_file_name)
-        with audio as source:
-            audio_file = r.record(source)
+def extract_audio_file(video_file):
+    video_data_dir = path.splitext(video_file)[0]
+    if not path.exists(video_data_dir):
+        os.mkdir(video_data_dir)
+    audio_file_name = f"{video_data_dir}/{os.path.basename(video_data_dir)}.wav"
+    if not path.exists(audio_file_name):
+        clip = mp.VideoFileClip(video_file)
+        clip.audio.write_audiofile(audio_file_name)
+
+    return audio_file_name
+
+def init_audio_transcripter(audio_file_name):
+    r = sr.Recognizer()
+    audio = sr.AudioFile(audio_file_name)
+    with audio as source:
+        audio_file = r.record(source)
     return r, audio_file
 
 def transcribe_audio(audio_file, r, start_msec, end_msec):
@@ -40,14 +41,18 @@ def transcribe_audio(audio_file, r, start_msec, end_msec):
         print("Could not transcribe audio")
         return  ""
 
-def process_video(video_file_name, transcribe_audio=False, draw_window=False):
+def process_video(video_file_name, serialize_slides=False, transcribe_audio=False, draw_window=False):
 
     video_file = f"{DATA_DIR}/{video_file_name}"
     if not path.exists(video_file):
         print("Video file provided does not exist")
         quit()
 
-    r, audio_file = init_audio_transcripter(video_file, transcribe_audio)
+
+    audio_file_name = extract_audio_file(video_file)
+    r, audio_file = None, None
+    if transcribe_audio:
+        r, audio_file = init_audio_transcripter(audio_file_name)
 
     cap = cv2.VideoCapture(video_file)
     num_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
@@ -101,14 +106,9 @@ def process_video(video_file_name, transcribe_audio=False, draw_window=False):
 
     cap.release()
 
-    video_data_dir = path.splitext(video_file)[0]
-    if not path.exists(video_data_dir):
-        os.mkdir(video_data_dir)
-    serialized_slides = []
-    for slide in slides:
-        serialized_slides.append(slide.to_json(path.splitext(video_file_name)[0]))
+    if serialize_slides:
+        serialize_slides(video_file_name, slides)
 
-    with open(f"{video_data_dir}/serialized_slides.json", "w") as f:
-        f.write(json.dumps(serialized_slides))
+    return slides
 
 

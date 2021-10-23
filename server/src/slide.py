@@ -29,11 +29,12 @@ def generate_paragraphs(data):
 
 class Slide:
 
-    def __init__(self, image, index, time_start, time_end, paragraphs=None, keywords=None, audio_transcript=None):
+    def __init__(self, image, index, time_start, time_end, paragraphs=None, keywords=None, audio_transcript=None, references=None):
         self.index = index
         self.image = image
         self.time_start, self.time_end = time_start, time_end
         self.audio_transcript = audio_transcript
+        self.references = references
         if not paragraphs and not keywords:
             self.data = tesseract.image_to_data(image, output_type=tesseract.Output.DICT)
             self.paragraphs = generate_paragraphs(self.data)
@@ -43,6 +44,7 @@ class Slide:
         else:
             self.paragraphs = paragraphs
             self.keywords = keywords
+            
 
     def to_json(self, video_file_name): # should be DATA_DIR/{video_name}/serialized_slides/slide_{i}.json
         to_json = {}
@@ -58,6 +60,7 @@ class Slide:
         to_json['audio_transcript'] = self.audio_transcript
         to_json['paragraphs'] = self.paragraphs
         to_json['keywords'] = self.keywords
+        to_json['references'] = self.references
 
         return to_json
 
@@ -71,3 +74,16 @@ class Slide:
                 data["paragraphs"],
                 data["keywords"],
                 data["audio_transcript"])
+                # data["references"])
+
+def serialize_slides(video_file_name, slides):
+    video_file = f"{DATA_DIR}/{video_file_name}"
+    video_data_dir = path.splitext(video_file)[0]
+    if not path.exists(video_data_dir):
+        os.mkdir(video_data_dir)
+    serialized_slides = []
+    for slide in slides:
+        serialized_slides.append(slide.to_json(path.splitext(video_file_name)[0]))
+
+    with open(f"{video_data_dir}/serialized_slides.json", "w") as f:
+        f.write(json.dumps(serialized_slides))
