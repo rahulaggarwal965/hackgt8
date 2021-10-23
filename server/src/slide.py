@@ -4,6 +4,7 @@ from cv2 import cv2
 import pytesseract as tesseract
 from rake_nltk import Rake
 import json
+from constants import DATA_DIR
 
 def cleanup(text):
    print(text.strip().split('\n')) 
@@ -43,28 +44,25 @@ class Slide:
             self.paragraphs = paragraphs
             self.keywords = keywords
 
-    def serialize(self, to_file): # should be DATA_DIR/{video_name}/serialized_slides/slide_{i}.json
+    def to_json(self, video_file_name): # should be DATA_DIR/{video_name}/serialized_slides/slide_{i}.json
         to_json = {}
         to_json['index'] = self.index
-        image_dir = path.realpath(f"{path.dirname(to_file)}/../images")
+        image_dir_rel = f"{video_file_name}/images"
+        image_dir = f"{DATA_DIR}/{image_dir_rel}"
         if not path.exists(image_dir):
             os.mkdir(image_dir)
         image_path = f"{image_dir}/image_{self.index}.png"
         cv2.imwrite(image_path, self.image)
-        to_json['image'] = image_path
+        to_json['image'] = image_dir_rel
         to_json['timestamp'] = (self.time_start / 1000, self.time_end/ 1000) # convert to seconds
         to_json['audio_transcript'] = self.audio_transcript
         to_json['paragraphs'] = self.paragraphs
         to_json['keywords'] = self.keywords
 
-        with open(to_file, "w") as f:
-            f.write(json.dumps(to_json, default=lambda o:o.__dict__, indent=2))
+        return to_json
 
     @staticmethod
-    def deserialize(file):
-        with open(file, "r") as f:
-            data_raw = f.read() 
-            data = json.loads(data_raw)
+    def deserialize(data):
 
         return Slide(
                 data["image"],
