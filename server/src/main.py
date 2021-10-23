@@ -2,7 +2,7 @@ import numpy as np
 from cv2 import cv2
 from Slide import Slide
 
-VIDEO_FILE = "../../data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU.mp4"
+VIDEO_FILE = "../../data/4 Cellular respiration slides 19-30-tUVjJ8ak3LU2.mp4"
 
 slides = [] # array of slides
 

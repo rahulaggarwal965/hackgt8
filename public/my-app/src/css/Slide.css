@@ -6,16 +6,20 @@
 .slide-and-keywords {
     display: flex;
 }
-.box {
-    background-color: black;
-}
 
 .vl {
     border-left: 100px solid red;
-    border-width: 20%;
     height: 84.5%;
     position: absolute;
     left: 73.5%;
     top: 8%;
     bottom: 0px;
 }
+
+.Keyword-List {
+    left: 80%;
+    top: 8%;
+    position: absolute;
+
+}
+
