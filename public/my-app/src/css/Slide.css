@@ -1,0 +1,20 @@
+.current-slide {
+    position: fixed; 
+    top: 60px;
+    left: 0;
+}
+.slide-and-keywords {
+    display: flex;
+}
+.box {
+    background-color: black;
+}
+
+.vl {
+    border-left: 60px solid red;
+    height: 720px;
+    position: absolute;
+    left: 1280px;
+    margin-left: -3px;
+    top: 60px;
+  }
