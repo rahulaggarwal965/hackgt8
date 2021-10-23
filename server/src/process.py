@@ -11,7 +11,7 @@ import moviepy.editor as mp
 import speech_recognition as sr
 
 # Local
-from Slide import Slide
+from slide import Slide
 
 def init_audio_transcripter(video_file, transcribe_audio):
     r, audio_file = None, None
