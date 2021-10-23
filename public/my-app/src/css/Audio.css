@@ -1,3 +1,26 @@
+audio::-webkit-media-controls-panel {
+    background-color: rgba(207, 143, 127, 0.514);
+    border-radius: 20px;
+}
+audio::-webkit-media-controls-play-button {
+    background-color: rgb(127, 132, 170);
+    border-radius: 100px;
+
+}
+audio::-webkit-media-controls-timeline {
+    background-color:  rgb(116, 89, 114);
+    border-radius: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-width: 5px;
+}
+audio::-webkit-media-controls-volume-slider {
+    background-color:white;
+    border-radius: 25px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 .audio-player {
-    color: green;
+    color: red;
+    width: 100%;
 }
