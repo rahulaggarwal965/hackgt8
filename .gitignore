@@ -1,2 +1,3 @@
 .env
 .envrc
+server/src/__pycache__

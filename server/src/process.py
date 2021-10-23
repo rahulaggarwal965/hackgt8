@@ -1,6 +1,7 @@
 # Paths
 import os
 from os import path
+import json
 
 # Image/Video
 import numpy as np
@@ -12,7 +13,7 @@ import speech_recognition as sr
 
 # Local
 from slide import Slide
-from constants import FRAME_DISTANCE_THRESHOLD
+from constants import FRAME_DISTANCE_THRESHOLD, DATA_DIR
 
 def init_audio_transcripter(video_file, transcribe_audio):
     r, audio_file = None, None
@@ -39,7 +40,9 @@ def transcribe_audio(audio_file, r, start_msec, end_msec):
         print("Could not transcribe audio")
         return  ""
 
-def process_video(video_file, transcribe_audio=False, draw_window=False):
+def process_video(video_file_name, transcribe_audio=False, draw_window=False):
+
+    video_file = f"{DATA_DIR}/{video_file_name}"
     if not path.exists(video_file):
         print("Video file provided does not exist")
         quit()
@@ -101,11 +104,11 @@ def process_video(video_file, transcribe_audio=False, draw_window=False):
     video_data_dir = path.splitext(video_file)[0]
     if not path.exists(video_data_dir):
         os.mkdir(video_data_dir)
-    serial_dir = f"{video_data_dir}/serialized_slides"
-    if not path.exists(serial_dir):
-        os.mkdir(serial_dir)
+    serialized_slides = []
     for slide in slides:
-        file = f"{serial_dir}/slide_{slide.index}.json"
-        slide.serialize(file)
+        serialized_slides.append(slide.to_json(path.splitext(video_file_name)[0]))
+
+    with open(f"{video_data_dir}/serialized_slides.json", "w") as f:
+        f.write(json.dumps(serialized_slides))
 
 
