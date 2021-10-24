@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import KeywordList from "./KeywordList";
 import "../css/Slide.css"
 import Modal from "react-modal";
@@ -9,11 +9,24 @@ import ListItemText from '@mui/material/ListItemText';
 Modal.setAppElement("#root");
 
 const Keyword = ({ word, list}) => {
+    const [pageCount, setPageCount] = useState(list[0]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
+    const handleBackButton = () => {
+        setPageCount((pageCount - 1) % list.length);
+    }
+    const handleNextButton = () => {
+        setPageCount((pageCount + 1) % list.length);
+    }
     function toggleModal() {
         setModalIsOpen(!modalIsOpen);
     }
+
+    
+
+    useEffect(() => {
+
+    }, []);
+
     return (
         <>
             <Modal isOpen={modalIsOpen} onRequestClose={toggleModal} contentLabel={word + " " + Math.random()}>

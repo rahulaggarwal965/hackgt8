@@ -2,22 +2,75 @@ import React, {useState, useEffect, useMemo} from "react";
 import Audio from "./components/Audio";
 import Slide from "./components/Slide";
 import "./App.css";
-import slidesjson from "./components/slidesjson";
+//import slidesjson from "./components/slidesjson";
 import "./css/Upload.css";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import KeywordList from "./components/KeywordList";
 
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+
+import "./css/Upload.css";
 
 
 function App() {
   const [pageCount, setPageCount] = useState(0);
-  const [wasUploaded, setWasUploaded] = useState(true);
+  const [wasUploaded, setWasUploaded] = useState(false);
   let keyWordMap = new Map();
   var slideMap = new Map();
-  //const [slidesjson, setSlidejson] = useState([]);
+  const [slidesjson, setSlidejson] = useState([
+    {
+        "index": 0,
+        "image": "4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images",
+        "timestamp": [
+            0.0,
+            48.266666666666666
+        ],
+        "audio_transcript": null,
+        "paragraphs": [
+            "BIO 210 Anatomy & Physiology",
+            "Chapter 4 Video 4",
+            "Cellular Respiration",
+            "Slides 19-30",
+            "Professor Mark Fandel",
+            " ",
+            ""
+        ],
+        "keywords": [
+            "chapter 4 video 4",
+            "professor mark fandel",
+            "bio 210 anatomy",
+            "slides 19",
+            "cellular respiration",
+            "physiology",
+            "30"
+        ],
+        "references": [
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                3,
+                14
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ]
+        ]
+    }]);
 
   const handleBackButton = () => {
     setPageCount(pageCount - 1);
@@ -59,7 +112,6 @@ function App() {
           if (mapp[word.toString()].length !== 0) {
             valueArr.push(mapp);
           }
-
           i++;
         });
         slideMap.set(element.index, valueArr);
@@ -79,24 +131,23 @@ function App() {
   const inputTextHandler = (e) => {
       setURL(e.target.value);
   };
+
   function sendReq() {
     let baseURL = "http://128.61.16.132:5000/";
-    console.log(wasUploaded);
-    setWasUploaded(true);
-    console.log(wasUploaded);
-    // fetch(baseURL, {
-    //     method: 'GET', // or 'PUT'
-    //     headers: {
-    //     'Content-Type': 'application/json',
-    //     'videoURL': URL,
-    //     'transcribe_audio': 0,
-    //     'draw_window': 0
-    //     }
-    // }).then(response => response.json())
-    // .then(data => {
-    //   //setSlidejson(data);
-    //   setWasUploaded(true);
-    // });
+    //setWasUploaded(true);
+    fetch(baseURL, {
+        method: 'GET', // or 'PUT'
+        headers: {
+        'Content-Type': 'application/json',
+        'videoURL': URL,
+        'transcribe_audio': 0,
+        'draw_window': 0
+        }
+    }).then(response => response.json())
+    .then(data => {
+      setSlidejson(data);
+      setWasUploaded(true);
+    });
 }
 
   return (    
@@ -132,17 +183,18 @@ function App() {
             <Audio url="audiofile.mp3" start={start} end={end}/>
         </Grid>
         </>): (
-
-          <div>
-            <img className="logo" src={"outlogo.jpg"} height="300px" />
-            <div className="form">
-                <div>
-                    <TextField value={URL} onChange={inputTextHandler} id="outlined-basic" label="URL" variant="outlined" />
-                </div>
-                <div id="upload-btn">
-                    <Button onSubmit={sendReq} variant="contained" size="large">Submit</Button>
-                </div>
-            </div>
+          <div className="App">
+            <div>
+              <img className="logo" src={"outlogo.jpg"} height="300px" />
+              <div className="form">
+                  <div>
+                      <TextField value={URL} onChange={inputTextHandler} id="outlined-basic" label="URL" variant="outlined" />
+                  </div>
+                  <div id="upload-btn">
+                      <Button onClick={sendReq} variant="contained" size="large">Submit</Button>
+                  </div>
+              </div>
+          </div>
         </div>
 
         )
