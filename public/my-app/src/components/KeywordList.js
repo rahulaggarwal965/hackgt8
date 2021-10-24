@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../css/KeywordList.css";
 import Keyword from "./Keyword";
 
 

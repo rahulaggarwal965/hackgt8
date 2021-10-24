@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import KeywordList from "./KeywordList";
-import "../css/Slide.css"
 
 const Slide = ({url}) => {
     
