@@ -16,7 +16,7 @@ if PROCESS:
     video_file_name = download(URL)
     slides = process_video(video_file_name)
     generate_graph(slides)
-    serialize_slides(VIDEO_FILE, slides)
+    serialize_slides(VIDEO_FILE, slides, write_to_file=True)
 else:
     SERIALIZED_SLIDES = f"{DATA_DIR}/4 Cellular respiration slides 19-30-tUVjJ8ak3LU/serialized_slides.json"
 
