@@ -6,9 +6,15 @@ import slidesjson from "./components/slidesjson";
 import "./css/Upload.css";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
+import KeywordList from "./components/KeywordList";
+
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+
+
 function App() {
   const [pageCount, setPageCount] = useState(0);
-  const [wasUploaded, setWasUploaded] = useState(false);
+  const [wasUploaded, setWasUploaded] = useState(true);
   let keyWordMap = new Map();
   var slideMap = new Map();
   //const [slidesjson, setSlidejson] = useState([]);
@@ -93,25 +99,39 @@ function App() {
     // });
 }
 
-  return (
-    <div className="App">
-      <>
+  return (    
+    <Grid container spacing={2}>
       {wasUploaded ? 
-        (
-        <>
-          <div className="header" onClick={e => console.log("map2[pageCount]")}>
-          <button>Home</button>
-          <button className="back-btn" onClick={handleBackButton} disabled={pageCount < 1}>{"<"}</button>
-          <button className="next-btn" onClick={handleNextButton} disabled={pageCount > 13}>{">"}</button>
-      </div>
-
-      <Slide url={"images/image_" + pageCount + ".png"} keywords={keywords} map={slideMap}  />
-
-      <div className="audio-footer">
-        <Audio url="audiofile.mp3" start={start} end={end}/>
-      </div>
-        </>
-        ): (
+        (<>
+          <Grid item xs={12}>
+            <Box sx={{
+                bgcolor: "#181b1f",
+                "text-align": "center"
+                    }}
+            >
+                <Button> Home</Button>
+                <Button onClick={handleBackButton} disabled={pageCount < 1}>{"<"}</Button>
+                <Button onClick={handleNextButton} disabled={pageCount > 13}>{">"}</Button>
+            </Box>
+        </Grid>
+        <Grid item xs={8}>
+            <Box sx={{ "text-align": "center" }}>
+               <Slide url={"images/image_" + pageCount + ".png"} keywords={keywords} map={slideMap}/>
+            </Box>
+        </Grid>
+        <Grid item xs={4}>
+            <Box sx={{
+                "text-align": "center",
+                    bgcolor: "#181b1f",
+                    padding: "10px",
+                    border_radius: "10px"}}>
+                 <KeywordList list={keywords} map={slideMap}/>
+            </Box>
+        </Grid>
+        <Grid item xs={12}>
+            <Audio url="audiofile.mp3" start={start} end={end}/>
+        </Grid>
+        </>): (
 
           <div>
             <img className="logo" src={"outlogo.jpg"} height="300px" />
@@ -127,9 +147,8 @@ function App() {
 
         )
       }
-      </>
-    </div>
-    
+        
+    </Grid>
   );
 
 }

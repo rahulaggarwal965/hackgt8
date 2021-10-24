@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import KeywordList from "./KeywordList";
 import "../css/Slide.css"
 
-const Slide = ({ url, keywords, map}) => {
+const Slide = ({url}) => {
     
     return (
-        <div className="slide-and-keywords">
-            <img className="current-slide" src={url} alt="A slide"  style={{ maxHeight: "80%" }} onClick={e => console.log(keywords)} />
-            {/* bruh who thhis fool in front of us */}            
-            <KeywordList list={keywords} map={map}/>
-        </div>
-
+            <img src={url} alt="A slide"  style={{ maxHeight: "80%" }}/>
     );
 
 };

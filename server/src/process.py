@@ -19,7 +19,9 @@ from constants import FRAME_DISTANCE_THRESHOLD, DATA_DIR
 def download(url):
     print(url)
     yt = YouTube(url)
-    video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').first()
+    video = yt.streams.get_highest_resolution()
+    print(video)
+    # video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').first()
     out_file = video.download(output_path=f"{DATA_DIR}")
     return os.path.basename(out_file)
 
