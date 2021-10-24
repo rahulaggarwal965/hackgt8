@@ -37,12 +37,14 @@ def createJSON():
     # }
     if request.method == "GET":
         vidURL = request.headers["videoURL"]
+        transcribe_audio = int(request.headers["transcribe_audio"])
+        draw_window = int(request.headers["draw_window"])
+        
         outFile = download(vidURL)
-        slides = process_video(outFile)
+        slides = process_video(outFile, transcribe_audio=transcribe_audio, draw_window=draw_window)
         generate_graph(slides)
         retVal = serialize_slides(outFile, slides)
         
-        ret = jsonify(success=True)
         return retVal
         #return ret
     #if request.method == "POST":

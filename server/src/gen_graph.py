@@ -23,6 +23,8 @@ def phrase_similarity(a, b):
     c = 0
     for i in range(len(rvector)):
             c+= l1[i]*l2[i]
+    if c == 0:
+        return 0
     cosine = c / float((sum(l1)*sum(l2))**0.5)
     return cosine
 
