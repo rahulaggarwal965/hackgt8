@@ -6,6 +6,7 @@ import json
 # Image/Video
 import numpy as np
 from cv2 import cv2
+from pytube import YouTube
 
 # Audio
 import moviepy.editor as mp
@@ -14,6 +15,12 @@ import speech_recognition as sr
 # Local
 from slide import Slide, serialize_slides
 from constants import FRAME_DISTANCE_THRESHOLD, DATA_DIR
+
+def download(url):
+    yt = YouTube(url)
+    video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').first()
+    out_file = video.download(output_path=f"{DATA_DIR}")
+    return os.path.basename(out_file)
 
 def extract_audio_file(video_file):
     video_data_dir = path.splitext(video_file)[0]
