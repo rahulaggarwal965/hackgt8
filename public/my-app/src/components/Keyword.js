@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import KeywordList from "./KeywordList";
-import "../css/Slide.css"
 import Modal from "react-modal";
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
