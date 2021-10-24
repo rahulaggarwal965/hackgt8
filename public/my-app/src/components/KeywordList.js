@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../css/KeywordList.css";
 import Keyword from "./Keyword";
+
+
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import { FixedSizeList } from 'react-window';
+
+
 const KeywordList = ({list, map}) => {
     const[nList, setNList] = useState([[]]);
     useEffect(() => {
@@ -13,30 +24,27 @@ const KeywordList = ({list, map}) => {
         };
         setNList(newList);
     }, [list]);
+
+    function renderRow(props) {
+      const { index, style } = props;
+      return (
+          <Keyword word={nList[index][0]} list={nList[index][1]}/>
+      )
+    }
+
     return (
         <>
-            <div className="Keyword-List">
-                <h1>Keywords</h1>
-                <div className="words">
-                    {/* {
-                        list.forEach(word => {
-                            <span className="keyword" onClick={e => console.log("keyword clicked")}>{word}</span>
-                        })
-                    } */}
-                    {
-                        nList.map(element => (
-                            <Keyword word={element[0]} list={element[1]} />
-                        ))
-                    }
-
-                    {/* <span className="keyword" onClick={e => console.log(list)}>Electron Transport Chain</span>
-                    <span className="keyword" onClick={e => console.log("keyword clicked")}>Supply Transport Chain</span>
-                    <span className="keyword" onClick={e => console.log("keyword clicked")}>Mcgrahill Chain</span>
-                    <span className="keyword" onClick={e => console.log("keyword clicked")}>Two Chain</span> */}
-                    
-                </div>
-                
-            </div>
+        <Typography sx={{ fontSize: 40, color: "#b3b3b3" }}>
+            Keywords
+        </Typography>
+        <FixedSizeList
+            height={650}
+            itemSize={36}
+            itemCount={nList.length}
+            overscanCount={0}
+        >
+        {renderRow}
+        </FixedSizeList>
         </>
     );
 };
