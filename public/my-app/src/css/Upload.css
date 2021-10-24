@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    top: 60%;
+    margin-top: 25%;
+}
+#upload-btn {
+    padding-left: 2%;
+}
+.logo {
+    position: fixed;
+    top: 10%;
+    left: 40%;
+}
