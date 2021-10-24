@@ -76,7 +76,7 @@ class Slide:
                 data["audio_transcript"])
                 # data["references"])
 
-def serialize_slides(video_file_name, slides):
+def serialize_slides(video_file_name, slides, write_to_file=False):
     video_file = f"{DATA_DIR}/{video_file_name}"
     video_data_dir = path.splitext(video_file)[0]
     if not path.exists(video_data_dir):
@@ -85,5 +85,8 @@ def serialize_slides(video_file_name, slides):
     for slide in slides:
         serialized_slides.append(slide.to_json(path.splitext(video_file_name)[0]))
 
-    with open(f"{video_data_dir}/serialized_slides.json", "w") as f:
-        f.write(json.dumps(serialized_slides))
+    structured = json.dumps(serialized_slides)
+    if write_to_file:
+        with open(f"{video_data_dir}/serialized_slides.json", "w") as f:
+            f.write(structured)
+    return structured

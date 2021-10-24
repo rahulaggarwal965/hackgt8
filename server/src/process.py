@@ -6,6 +6,7 @@ import json
 # Image/Video
 import numpy as np
 from cv2 import cv2
+from pytube import YouTube
 
 # Audio
 import moviepy.editor as mp
@@ -14,6 +15,13 @@ import speech_recognition as sr
 # Local
 from slide import Slide, serialize_slides
 from constants import FRAME_DISTANCE_THRESHOLD, DATA_DIR
+
+def download(url):
+    print(url)
+    yt = YouTube(url)
+    video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').first()
+    out_file = video.download(output_path=f"{DATA_DIR}")
+    return os.path.basename(out_file)
 
 def extract_audio_file(video_file):
     video_data_dir = path.splitext(video_file)[0]
@@ -33,7 +41,7 @@ def init_audio_transcripter(audio_file_name):
         audio_file = r.record(source)
     return r, audio_file
 
-def transcribe_audio(audio_file, r, start_msec, end_msec):
+def transcribe_audio_segment(audio_file, r, start_msec, end_msec):
     try:
         seg = audio_file.get_segment(start_msec, end_msec)
         return r.recognize_google(seg)
@@ -88,7 +96,7 @@ def process_video(video_file_name, serialize_slides=False, transcribe_audio=Fals
             time_in_msec = cap.get(cv2.CAP_PROP_POS_MSEC)
             slides[-1].time_end = time_in_msec
             if transcribe_audio:
-                slides[-1].audio_transcript = transcribe_audio(audio_file, r, slides[-1].time_start, slides[-1].time_end)
+                slides[-1].audio_transcript = transcribe_audio_segment(audio_file, r, slides[-1].time_start, slides[-1].time_end)
             slides.append(Slide(frame, len(slides), time_start=time_in_msec, time_end=None))
 
         current_frame += 1
@@ -102,7 +110,7 @@ def process_video(video_file_name, serialize_slides=False, transcribe_audio=Fals
     slides[-1].time_end = num_frames * 1000 / fps
     if transcribe_audio:
         # purposely don't specify end so we automatically get end
-        slides[-1].audio_transcript = transcribe_audio(audio_file, r, slides[-1].time_start, None)
+        slides[-1].audio_transcript = transcribe_audio_segment(audio_file, r, slides[-1].time_start, None)
 
     cap.release()
 
