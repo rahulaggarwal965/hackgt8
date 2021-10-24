@@ -9,6 +9,9 @@ from flask_sqlalchemy import SQLAlchemy
 from process import download, process_video
 from gen_graph import generate_graph
 from slide import serialize_slides
+
+from constants import DATA_DIR, PUB_DIR
+
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "slidedatabase.db"))
 
@@ -24,17 +27,15 @@ def createJSON():
         transcribe_audio = int(request.headers["transcribe_audio"])
         draw_window = int(request.headers["draw_window"])
         
-        outFile = download(vidURL)
-        mypath = "../../data/" + outFile + "/images"
-        files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
-        print(files)
-        for f in files:
-            file = ""
-            file += mypath + f
-            shutil.copy(file, "../../public/my-app/public/images")
-        slides = process_video(outFile, transcribe_audio=transcribe_audio, draw_window=draw_window)
+        video_file_name = download(vidURL)
+        slides = process_video(video_file_name, transcribe_audio=transcribe_audio, draw_window=draw_window)
         generate_graph(slides)
-        retVal = serialize_slides(outFile, slides)
+        retVal = serialize_slides(video_file_name, slides)
+        image_dir = f"{DATA_DIR}/{os.path.splitext(video_file_name)[0]}/images"
+        for f in os.listdir(image_dir):
+            image_file = f"{image_dir}/{f}"
+            if (isfile(image_file)):
+                shutil.copy(image_file, f"{PUB_DIR}/{f}")
         
         return retVal
 
