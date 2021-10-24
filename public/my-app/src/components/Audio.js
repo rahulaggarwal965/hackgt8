@@ -5,8 +5,8 @@ const Audio = ({ url, start, end }) => {
     const audioUrl = `${url}#t=${start},${end}`;
     return (
         <>
-            <audio controls className="audio-player">
-                <source src={audioUrl} type="audio/mpeg" />
+            <audio controls className="audio-player" src={audioUrl} type="audio/mpeg">
+                {/* <source src={audioUrl} type="audio/mpeg" /> */}
             </audio>
         </>
 
