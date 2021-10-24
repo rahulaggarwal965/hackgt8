@@ -13,7 +13,6 @@ const Upload = () => {
         fetch(baseURL, {
             method: 'GET', // or 'PUT'
             headers: {
-            'Content-Type': 'application/json',
             'videoURL': URL,
             'transcribe_audio': 0,
             'draw_window': 0

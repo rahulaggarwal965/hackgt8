@@ -1,8 +1,8 @@
-import React, {useState, useEffect, useMemo} from "react";
+import React, {useState, useEffect} from "react";
 import Audio from "./components/Audio";
 import Slide from "./components/Slide";
 import "./App.css";
-//import slidesjson from "./components/slidesjson";
+import slidesjson from "./components/slidesjson";
 import "./css/Upload.css";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
@@ -19,58 +19,58 @@ function App() {
   const [wasUploaded, setWasUploaded] = useState(false);
   let keyWordMap = new Map();
   var slideMap = new Map();
-  const [slidesjson, setSlidejson] = useState([
-    {
-        "index": 0,
-        "image": "4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images",
-        "timestamp": [
-            0.0,
-            48.266666666666666
-        ],
-        "audio_transcript": null,
-        "paragraphs": [
-            "BIO 210 Anatomy & Physiology",
-            "Chapter 4 Video 4",
-            "Cellular Respiration",
-            "Slides 19-30",
-            "Professor Mark Fandel",
-            " ",
-            ""
-        ],
-        "keywords": [
-            "chapter 4 video 4",
-            "professor mark fandel",
-            "bio 210 anatomy",
-            "slides 19",
-            "cellular respiration",
-            "physiology",
-            "30"
-        ],
-        "references": [
-            [
-                0
-            ],
-            [
-                0
-            ],
-            [
-                0
-            ],
-            [
-                0
-            ],
-            [
-                3,
-                14
-            ],
-            [
-                0
-            ],
-            [
-                0
-            ]
-        ]
-    }]);
+  // const [slidesjson, setSlidejson] = useState([
+  //   {
+  //       "index": 0,
+  //       "image": "4 Cellular respiration slides 19-30-tUVjJ8ak3LU/images",
+  //       "timestamp": [
+  //           0.0,
+  //           48.266666666666666
+  //       ],
+  //       "audio_transcript": null,
+  //       "paragraphs": [
+  //           "BIO 210 Anatomy & Physiology",
+  //           "Chapter 4 Video 4",
+  //           "Cellular Respiration",
+  //           "Slides 19-30",
+  //           "Professor Mark Fandel",
+  //           " ",
+  //           ""
+  //       ],
+  //       "keywords": [
+  //           "chapter 4 video 4",
+  //           "professor mark fandel",
+  //           "bio 210 anatomy",
+  //           "slides 19",
+  //           "cellular respiration",
+  //           "physiology",
+  //           "30"
+  //       ],
+  //       "references": [
+  //           [
+  //               2, 3
+  //           ],
+  //           [
+  //               0
+  //           ],
+  //           [
+  //               0
+  //           ],
+  //           [
+  //               0
+  //           ],
+  //           [
+  //               3,
+  //               14
+  //           ],
+  //           [
+  //               0
+  //           ],
+  //           [
+  //               0
+  //           ]
+  //       ]
+  //   }]);
 
   const handleBackButton = () => {
     setPageCount(pageCount - 1);
@@ -135,19 +135,20 @@ function App() {
   function sendReq() {
     let baseURL = "http://128.61.16.132:5000/";
     //setWasUploaded(true);
-    fetch(baseURL, {
-        method: 'GET', // or 'PUT'
-        headers: {
-        'Content-Type': 'application/json',
-        'videoURL': URL,
-        'transcribe_audio': 0,
-        'draw_window': 0
-        }
-    }).then(response => response.json())
-    .then(data => {
-      setSlidejson(data);
-      setWasUploaded(true);
-    });
+    console.log(URL);
+    setWasUploaded(true);
+    // fetch(baseURL, {
+    //     method: 'GET', // or 'PUT'
+    //     headers: {
+    //     'videoURL': URL,
+    //     'transcribe_audio': 0,
+    //     'draw_window': 0
+    //     }
+    // }).then(response => response.json())
+    // .then(data => {
+    //   //setSlidejson(data);
+    //   setWasUploaded(true);
+    // });
 }
 
   return (    
